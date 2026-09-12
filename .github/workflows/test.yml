@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Test
+        run: pytest -q
+      - name: Smoke-test the CLI
+        run: |
+          python -c "
+          import numpy as np, csv
+          r = np.random.default_rng(0).normal(0.0008, 0.01, 900)
+          with open('smoke.csv','w',newline='') as f:
+              w=csv.writer(f); w.writerow(['ret'])
+              for v in r: w.writerow([f'{v:.6f}'])
+          "
+          nullfloor smoke.csv -c ret -t 250
+          nullfloor smoke.csv -c ret --json > /dev/null
+          nullfloor --version

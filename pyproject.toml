@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nullfloor"
+version = "0.1.0"
+description = "Is your backtest a real edge, or is it noise? Deflated Sharpe, PSR, and resampling tests for trading strategies."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "hfinisher" }]
+keywords = [
+    "backtest", "overfitting", "sharpe-ratio", "deflated-sharpe",
+    "quantitative-finance", "algorithmic-trading", "statistics",
+    "bootstrap", "permutation-test", "monte-carlo",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Typing :: Typed",
+]
+dependencies = ["numpy>=1.21", "scipy>=1.7"]
+
+[project.optional-dependencies]
+cli = ["pandas>=1.3"]
+dev = ["pytest>=7", "pandas>=1.3"]
+
+[project.urls]
+Homepage = "https://github.com/hfinisher/nullfloor"
+Repository = "https://github.com/hfinisher/nullfloor"
+Issues = "https://github.com/hfinisher/nullfloor/issues"
+
+[project.scripts]
+nullfloor = "nullfloor.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
