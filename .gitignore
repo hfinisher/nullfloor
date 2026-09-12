@@ -15,3 +15,14 @@ htmlcov/
 *.swp
 .idea/
 .vscode/
+
+# Secrets -- never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.pypirc
+.dash_token
+secrets.*
+credentials.*
