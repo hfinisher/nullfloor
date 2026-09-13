@@ -26,3 +26,12 @@ htmlcov/
 .dash_token
 secrets.*
 credentials.*
+
+# Private business research -- never publish
+research/
+
+# Private business assets -- never publish
+business/
+
+# Deep research reports (private)
+deep-research-report*.md
